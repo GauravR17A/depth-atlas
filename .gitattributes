@@ -8,3 +8,4 @@
 casepacks/** -text
 docs/evidence/** -text
 tests/fixtures/** -text
+*.pdf binary
