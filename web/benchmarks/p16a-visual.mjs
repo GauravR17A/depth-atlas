@@ -1,0 +1,35 @@
+import { chromium } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+const out=process.env.OCEAN_VISUAL_DIR?resolve(process.env.OCEAN_VISUAL_DIR):resolve(import.meta.dirname,'../../docs/evidence');
+await mkdir(out,{recursive:true});
+const browser=await chromium.launch();
+const results=[];
+for(const [name,width,height] of [['desktop',1536,960],['tablet',768,1024],['mobile',393,851]]){
+ const page=await browser.newPage({viewport:{width,height}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(process.env.OCEAN_TEST_URL??'http://127.0.0.1:8025');
+ await page.getByRole('button',{name:'Skip tutorial',exact:true}).click();
+ await page.getByRole('button',{name:'Tools',exact:true}).click();await page.getByRole('button',{name:'Open instruments',exact:true}).click();
+ await page.getByLabel('Observed sample value').waitFor();
+ await page.screenshot({path:resolve(out,`p16a-connected-${name}.png`)});
+ const checks=[{view:'connected',overflow:await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)}];
+ await page.getByRole('button',{name:'Import observations',exact:true}).click();
+ await page.getByText('Formats and genuine example files',{exact:true}).click();
+ await page.getByRole('button',{name:'Preview SR1902594_034.nc',exact:true}).click();
+ await page.getByRole('button',{name:'Add profiles to workspace',exact:true}).waitFor();
+ await page.getByLabel('Import preview').scrollIntoViewIfNeeded();
+ await page.screenshot({path:resolve(out,`p16a-preview-${name}.png`)});
+ checks.push({view:'preview',overflow:await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)});
+ await page.getByRole('button',{name:'Add profiles to workspace',exact:true}).click();
+ await page.getByRole('button',{name:'Import observations',exact:true}).click();
+ await page.getByLabel('Profile variable').selectOption('chlorophyll');
+ await page.locator('.profile-chart').scrollIntoViewIfNeeded();
+ await page.screenshot({path:resolve(out,`p16a-chlorophyll-${name}.png`)});
+ checks.push({view:'chlorophyll',overflow:await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)});
+ results.push({name,checks,errors});
+ await page.close();
+}
+await browser.close();
+await writeFile(resolve(out,'p16a-visual-automated.json'),JSON.stringify(results,null,2));
+console.log(JSON.stringify(results));
+if(results.some(r=>r.errors.length||r.checks.some(c=>c.overflow)))process.exitCode=1;

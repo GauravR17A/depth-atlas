@@ -1,0 +1,60 @@
+import { ApiError } from '../contracts';
+import { parseInstrumentCatalog,type InstrumentSummary } from '../instruments/contracts';
+
+export type MatchVariable='temperature'|'salinity';
+export type MatchSettings={variable:MatchVariable;time_index:number;time_window_hours:number;distance_km:number;max_vertical_gap_m:number;qc:'good'|'good_probably_good'};
+export type MatchRow={sample_index:number;observation_time:string;latitude:number;longitude:number;depth_m:number|null;observed:number|null;model:number|null;residual:number|null;accepted:boolean;reason:string;qc:string;mode:string;model_latitude:number|null;model_longitude:number|null;distance_km:number|null;time_offset_hours:number;lower_depth_m:number|null;upper_depth_m:number|null;upper_weight:number|null;model_lower_value:number|null;model_upper_value:number|null};
+export type SampleMetrics={count:number;bias:number|null;rmse:number|null;mae:number|null;maximum_abs_residual:number|null};
+type Common={schema_version:'1';method_version:string;case_id:string;manifest_sha256:string;observation_library_sha256:string;model_time:string;settings:MatchSettings;methods:string[];caveats:string[]};
+export type Comparison=Common&{kind:'model_observation_comparison';profile:InstrumentSummary;units:string;total_samples:number;matched_count:number;excluded_count:number;exclusion_counts:Record<string,number>;metrics:SampleMetrics;rows:MatchRow[]};
+export type CoverageProfile={profile:InstrumentSummary;total_samples:number;matched_count:number;excluded_count:number;exclusion_counts:Record<string,number>;eligible_depths_m:number[];time_offset_hours_min:number;time_offset_hours_max:number;minimum_abs_time_offset_hours:number|null;distance_km_min:number|null;distance_km_max:number|null;metrics:SampleMetrics;suggested_time_index:number|null;suggested_matched_count:number;suggested_time_offset_hours:number|null;suggested_distance_km:number|null};
+export type Coverage=Common&{kind:'observation_coverage';total_profiles:number;matched_profiles:number;total_samples:number;matched_samples:number;excluded_samples:number;exclusion_counts:Record<string,number>;profiles:CoverageProfile[]};
+
+const obj=(v:unknown):v is Record<string,unknown>=>typeof v==='object'&&v!==null&&!Array.isArray(v);
+const finite=(v:unknown):v is number=>typeof v==='number'&&Number.isFinite(v);
+const count=(v:unknown):v is number=>finite(v)&&Number.isInteger(v)&&v>=0;
+const nullable=(v:unknown)=>v===null||finite(v);
+const date=(v:unknown):v is string=>typeof v==='string'&&v.endsWith('Z')&&Number.isFinite(Date.parse(v));
+const strings=(v:unknown):v is string[]=>Array.isArray(v)&&v.every(s=>typeof s==='string');
+const hash=(v:unknown)=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);
+const fail=()=>new ApiError('The comparison response could not be verified. No unverified values are displayed.',undefined,'response');
+const equal=(a:number,b:number)=>Math.abs(a-b)<=1e-7*Math.max(1,Math.abs(a),Math.abs(b));
+function settings(v:unknown):v is MatchSettings{return obj(v)&&['temperature','salinity'].includes(String(v.variable))&&count(v.time_index)&&v.time_index<=6&&finite(v.time_window_hours)&&v.time_window_hours>=0&&v.time_window_hours<=72&&finite(v.distance_km)&&v.distance_km>=0&&v.distance_km<=50&&finite(v.max_vertical_gap_m)&&v.max_vertical_gap_m>=1&&v.max_vertical_gap_m<=1000&&['good','good_probably_good'].includes(String(v.qc));}
+function common(v:unknown):v is Common&Record<string,unknown>{return obj(v)&&v.schema_version==='1'&&v.method_version==='p05-native-column-v1'&&typeof v.case_id==='string'&&hash(v.manifest_sha256)&&hash(v.observation_library_sha256)&&date(v.model_time)&&settings(v.settings)&&strings(v.methods)&&strings(v.caveats);}
+function summary(v:unknown):v is InstrumentSummary{try{parseInstrumentCatalog({schema_version:'2',profiles:[v],examples:[],limitations:[]});return true;}catch{return false;}}
+function exclusions(v:unknown,total:number):v is Record<string,number>{return obj(v)&&Object.values(v).every(count)&&Object.values(v).reduce<number>((n,c)=>n+Number(c),0)===total;}
+function metrics(v:unknown,n:number):v is SampleMetrics{return obj(v)&&v.count===n&&['bias','rmse','mae','maximum_abs_residual'].every(k=>n===0?v[k]===null:finite(v[k]))&&(n===0||Number(v.rmse)>=0&&Number(v.mae)>=0&&Number(v.maximum_abs_residual)>=0);}
+export function row(v:unknown):v is MatchRow{
+  if(!obj(v)||!count(v.sample_index)||!date(v.observation_time)||!finite(v.latitude)||Math.abs(v.latitude)>90||!finite(v.longitude)||Math.abs(v.longitude)>180||!finite(v.time_offset_hours)||typeof v.accepted!=='boolean'||!['reason','qc','mode'].every(k=>typeof v[k]==='string')||!['depth_m','observed','model','residual','model_latitude','model_longitude','distance_km','lower_depth_m','upper_depth_m','upper_weight','model_lower_value','model_upper_value'].every(k=>nullable(v[k])))return false;
+  if(v.accepted){if(v.reason!=='accepted'||!['depth_m','observed','model','residual','model_latitude','model_longitude','distance_km','lower_depth_m','upper_depth_m','upper_weight','model_lower_value','model_upper_value'].every(k=>finite(v[k])))return false;const r=v as unknown as MatchRow;if(r.depth_m!<0||r.distance_km!<0||r.lower_depth_m!>r.depth_m!||r.upper_depth_m!<r.depth_m!||r.upper_weight!<0||r.upper_weight!>1||!equal(r.residual!,r.model!-r.observed!)||!equal(r.model!,r.model_lower_value!+(r.model_upper_value!-r.model_lower_value!)*r.upper_weight!))return false;}
+  else if(v.residual!==null||v.model!==null)return false;
+  return true;
+}
+export function parseComparison(v:unknown):Comparison{
+  if(!common(v)||v.kind!=='model_observation_comparison'||!summary(v.profile)||typeof v.units!=='string'||!count(v.total_samples)||v.total_samples!==v.profile.samples||!count(v.matched_count)||!count(v.excluded_count)||v.matched_count+v.excluded_count!==v.total_samples||!exclusions(v.exclusion_counts,v.excluded_count)||!metrics(v.metrics,v.matched_count)||!Array.isArray(v.rows)||v.rows.length!==v.total_samples||!v.rows.every(row)||new Set(v.rows.map(r=>r.sample_index)).size!==v.total_samples||v.rows.filter(r=>r.accepted).length!==v.matched_count)throw fail();
+  const verified=v as Comparison;
+  if(verified.units!==(verified.settings.variable==='temperature'?'°C':'psu')||verified.rows.some(r=>!equal(r.time_offset_hours,(Date.parse(r.observation_time)-Date.parse(verified.model_time))/3600000)||r.accepted&&(Math.abs(r.time_offset_hours)>verified.settings.time_window_hours||r.distance_km!>verified.settings.distance_km||r.upper_depth_m!-r.lower_depth_m!>verified.settings.max_vertical_gap_m)))throw fail();
+  const counts:Record<string,number>={};for(const r of verified.rows)if(!r.accepted)counts[r.reason]=(counts[r.reason]??0)+1;
+  if(Object.keys(counts).length!==Object.keys(verified.exclusion_counts).length||Object.entries(counts).some(([k,n])=>verified.exclusion_counts[k]!==n))throw fail();
+  const accepted=verified.rows.filter(r=>r.accepted);if(accepted.length){const residuals=accepted.map(r=>r.residual!),n=accepted.length;const expected=[residuals.reduce((s,r)=>s+r,0)/n,Math.sqrt(residuals.reduce((s,r)=>s+r*r,0)/n),residuals.reduce((s,r)=>s+Math.abs(r),0)/n,Math.max(...residuals.map(Math.abs))];if(['bias','rmse','mae','maximum_abs_residual'].some((k,i)=>!equal(Number(verified.metrics[k as keyof SampleMetrics]),expected[i])))throw fail();}
+  return v as Comparison;
+}
+export function parseCoverage(v:unknown):Coverage{
+  if(!common(v)||v.kind!=='observation_coverage'||!['total_profiles','matched_profiles','total_samples','matched_samples','excluded_samples'].every(k=>count(v[k]))||Number(v.matched_samples)+Number(v.excluded_samples)!==v.total_samples||!exclusions(v.exclusion_counts,Number(v.excluded_samples))||!Array.isArray(v.profiles)||v.profiles.length!==v.total_profiles)throw fail();
+  for(const p of v.profiles){if(!obj(p)||!summary(p.profile)||p.total_samples!==p.profile.samples||!count(p.matched_count)||!count(p.excluded_count)||p.matched_count+p.excluded_count!==p.total_samples||!exclusions(p.exclusion_counts,p.excluded_count)||!metrics(p.metrics,p.matched_count)||!Array.isArray(p.eligible_depths_m)||p.eligible_depths_m.length!==p.matched_count||!p.eligible_depths_m.every(d=>finite(d)&&d>=0)||!finite(p.time_offset_hours_min)||!finite(p.time_offset_hours_max)||p.time_offset_hours_min>p.time_offset_hours_max||!nullable(p.distance_km_min)||!nullable(p.distance_km_max)||!(p.suggested_time_index===null||count(p.suggested_time_index)&&p.suggested_time_index<=6)||!count(p.suggested_matched_count)||p.suggested_matched_count>p.profile.samples||p.suggested_time_index===null&&p.suggested_matched_count!==0)throw fail();}
+  const profiles=v.profiles as CoverageProfile[];
+  if(profiles.some(p=>p.matched_count===0?p.minimum_abs_time_offset_hours!==null:!finite(p.minimum_abs_time_offset_hours)||p.minimum_abs_time_offset_hours<0||p.minimum_abs_time_offset_hours>v.settings.time_window_hours))throw fail();
+  if(profiles.some(p=>p.suggested_time_index===null?p.suggested_time_offset_hours!==null||p.suggested_distance_km!==null:!finite(p.suggested_time_offset_hours)||p.suggested_time_offset_hours<0||p.suggested_time_offset_hours>v.settings.time_window_hours||!finite(p.suggested_distance_km)||p.suggested_distance_km<0||p.suggested_distance_km>v.settings.distance_km))throw fail();
+  if(profiles.some(p=>p.matched_count===0?p.distance_km_min!==null||p.distance_km_max!==null:p.distance_km_min===null||p.distance_km_max===null||p.distance_km_min<0||p.distance_km_min>p.distance_km_max||p.distance_km_max>v.settings.distance_km||Math.max(Math.abs(p.time_offset_hours_min),Math.abs(p.time_offset_hours_max))>v.settings.time_window_hours))throw fail();
+  if(new Set(profiles.map(p=>p.profile.id)).size!==profiles.length||profiles.filter(p=>p.matched_count>0).length!==v.matched_profiles||profiles.reduce((n,p)=>n+p.matched_count,0)!==v.matched_samples||profiles.reduce((n,p)=>n+p.total_samples,0)!==v.total_samples)throw fail();
+  const verified=v as Coverage,totals:Record<string,number>={};for(const p of profiles)for(const [k,n] of Object.entries(p.exclusion_counts))totals[k]=(totals[k]??0)+n;
+  if(Object.keys(totals).length!==Object.keys(verified.exclusion_counts).length||Object.entries(totals).some(([k,n])=>verified.exclusion_counts[k]!==n))throw fail();
+  return v as Coverage;
+}
+export function querySettings(s:MatchSettings){return new URLSearchParams(Object.entries(s).map(([k,v])=>[k,String(v)])).toString();}
+export function verifyRequest<T extends Comparison|Coverage>(v:T,s:MatchSettings,caseId:string,profileId?:string,modelTime?:string):T{if(v.case_id!==caseId||modelTime&&v.model_time!==modelTime||Object.entries(s).some(([k,x])=>v.settings[k as keyof MatchSettings]!==x)||profileId&&('profile' in v?v.profile.id!==profileId:true))throw fail();return v;}
+const reasons:Record<string,string>={source_review:'Source held for review: original metadata contains calibration-verification text.',outside_domain:'Outside this model domain',time_window:'Outside the selected time window',distance:'Nearest model column exceeds the distance limit',variable_unavailable:'Variable is not supplied',incompatible_variable:'Physical definition or temperature scale is incompatible or unverified',observation_qc:'Variable quality flag is excluded',coordinate_qc:'Position, pressure or time quality is excluded',missing_value:'Observation is missing',invalid_depth:'Valid depth is unavailable',depth_outside:'Depth is outside the available model column',masked_bracket:'Native model bracket is masked',vertical_gap:'Native depth gap exceeds the selected limit',accepted:'Eligible pair'};
+export function reasonLabel(code:string){return reasons[code]??code.replaceAll('_',' ');}
+export const number=(v:number|null|undefined,digits=3)=>v===null||v===undefined?'Not available':v.toLocaleString('en-US',{maximumFractionDigits:digits});
+export const utc=(v:string)=>v.replace('T',' ').replace(/:00Z$/,' UTC').replace('Z',' UTC');
+export const signed=(v:number,digits=2)=>`${v>0?'+':''}${number(v,digits)}`;

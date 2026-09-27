@@ -1,0 +1,10 @@
+# Offline data acquisition, normalization and numerical checks only.
+# Keep the public API's runtime small; it serves the checked case pack.
+-r requirements-dev.in
+xarray==2025.6.1
+numpy==2.2.6
+netCDF4==1.7.4
+gsw==3.6.20
+pydap==3.5.9
+OWSLib==0.35.0
+pillow==11.3.0

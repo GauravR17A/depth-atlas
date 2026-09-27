@@ -1,0 +1,22 @@
+{
+  "schema_version": "1",
+  "file": "arabian-sea-2024-01.nc",
+  "bytes": 28575372,
+  "sha256": "39f13e171dd0dfa49a31bdf60c18506e367b28c86134d248948a973587ab2611",
+  "source_manifest_sha256": "5ddd8aaf9ef80700ad0ad7c583947bccad0b693533995f1fc923a8e33e687426",
+  "conventions": "CF-1.10",
+  "method_id": "p06-cf-exchange-v1",
+  "shape": [
+    7,
+    40,
+    76,
+    63
+  ],
+  "variables": [
+    "temperature",
+    "salinity",
+    "eastward_velocity",
+    "northward_velocity",
+    "horizontal_kinetic_energy"
+  ]
+}

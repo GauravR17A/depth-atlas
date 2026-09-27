@@ -1,0 +1,20 @@
+import { chromium } from '@playwright/test';
+import { mkdir,writeFile } from 'node:fs/promises';
+import path from 'node:path';
+const base=process.argv[2]??'http://127.0.0.1:8009',out=path.resolve(process.argv[3]??'../docs/evidence/p11-visual-local');
+await mkdir(out,{recursive:true});const browser=await chromium.launch({headless:true}),checks=[],errors=[];
+const page=await browser.newPage({viewport:{width:1536,height:1000}});page.on('pageerror',e=>errors.push(e.message));
+await page.addInitScript(()=>Object.defineProperty(navigator,'connection',{value:{saveData:true},configurable:true}));
+async function shot(name,locator=page,expectedAlerts=[]){await locator.screenshot({path:path.join(out,name+'.png')});const alerts=await page.getByRole('alert').filter({visible:true}).allTextContents();checks.push({name,overflow:await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),alerts,unexpectedAlerts:alerts.filter(a=>!expectedAlerts.some(e=>a.includes(e)))});await writeFile(path.join(out,'checks.json'),JSON.stringify({base,checks,errors,complete:false},null,2));}
+async function open(cid='bay-bengal-2024-01'){await page.goto(base);await page.getByLabel('Study case',{exact:true}).selectOption(cid);await page.getByRole('button',{name:'Drift Lab',exact:true}).click();await page.locator('.drift-map-top').getByText(/2024-01-07 00:00 UTC/).waitFor();}
+async function run(label='A'){await page.getByRole('button',{name:`Calculate run ${label}`,exact:true}).click();await page.getByLabel(`Applied drift run ${label}`,{exact:true}).waitFor();await page.getByRole('button',{name:'Cancel calculation',exact:true}).waitFor({state:'hidden'});}
+try{
+for(const [cid,label] of [['bay-bengal-2024-01','bay'],['arabian-sea-2024-01','arabian']]){
+  await open(cid);await shot(label+'-setup',page.getByLabel('Drift Lab',{exact:true}));await run();await shot(label+'-paths',page.locator('.drift-stage'));await shot(label+'-results',page.getByLabel('Applied drift runs'));
+  await page.getByRole('button',{name:'Compare another release',exact:true}).click();await page.getByLabel('Drift start snapshot',{exact:true}).selectOption('2');await page.getByText('Target box and numerical settings',{exact:true}).click();await page.getByLabel('Enable drift target box').check();await page.getByLabel('Drift integration step').selectOption('1200');await run('B');await shot(label+'-comparison',page.locator('.drift-stage'));await shot(label+'-arrival-counts',page.getByLabel('Applied drift runs'));await page.getByRole('slider',{name:'Drift elapsed time',exact:true}).fill('21600');await shot(label+'-six-hours',page.locator('.drift-stage'));
+}
+await page.getByLabel('Drift start snapshot').selectOption('6');await page.getByRole('button',{name:'Calculate run B',exact:true}).click();await page.getByRole('alert').waitFor();await shot('forcing-exhausted',page.locator('.drift-stage'),['Only 0 hours of forcing remain']);
+for(const width of [800,390,320]){await page.setViewportSize({width,height:900});await open();await page.getByLabel('Drift particle count').fill('6');await page.getByLabel('Drift duration hours').fill('6');await run();await shot('workspace-'+width,page.getByLabel('Drift Lab',{exact:true}));await shot('paths-'+width,page.locator('.drift-stage'));}
+await page.setViewportSize({width:900,height:1000});await page.addStyleTag({content:'html{font-size:200% !important}'});await shot('enlarged-text',page.getByLabel('Drift Lab',{exact:true}));
+await writeFile(path.join(out,'checks.json'),JSON.stringify({base,checks,errors,complete:true},null,2));console.log(JSON.stringify({screenshots:checks.length,errors,overflow:checks.filter(c=>c.overflow),unexpectedAlerts:checks.filter(c=>c.unexpectedAlerts.length)},null,2));if(errors.length||checks.some(c=>c.overflow||c.unexpectedAlerts.length))process.exitCode=1;
+}catch(error){await page.screenshot({path:path.join(out,'failure.png'),fullPage:true});await writeFile(path.join(out,'failure.json'),JSON.stringify({message:error.message,checks,errors,alerts:await page.getByRole('alert').filter({visible:true}).allTextContents()},null,2));throw error;}finally{await browser.close();}

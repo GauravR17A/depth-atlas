@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog name="Depth Atlas historical case" xmlns="http://www.unidata.ucar.edu/namespaces/thredds/InvCatalog/v1.0">
+  <service name="ocean" serviceType="Compound" base="">
+    <service name="odap" serviceType="OPENDAP" base="/thredds/dodsC/"/>
+    <service name="wms" serviceType="WMS" base="/thredds/wms/"/>
+    <service name="wcs" serviceType="WCS" base="/thredds/wcs/"/>
+    <service name="file" serviceType="HTTPServer" base="/thredds/fileServer/"/>
+  </service>
+  <datasetRoot path="ocean" location="__OCEAN_DATA__/"/>
+  <dataset name="Bay of Bengal, 7-10 January 2024" ID="ocean/bay-bengal-2024-01" urlPath="ocean/bay-bengal-2024-01.nc">
+    <serviceName>ocean</serviceName>
+    <dataType>Grid</dataType>
+    <documentation type="summary">Bounded historical HYCOM model subset. Native grid, masks and irregular depths retained. Horizontal kinetic energy is derived. This is not a live forecast.</documentation>
+  </dataset>
+</catalog>

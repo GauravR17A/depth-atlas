@@ -1,0 +1,24 @@
+services:
+  ocean-navigator:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "127.0.0.1:8000:8000"
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+  standards:
+    profiles: [standards]
+    build:
+      context: ..
+      dockerfile: deploy/standards/Dockerfile
+    ports:
+      - "127.0.0.1:8096:8096"
+    volumes:
+      - ../casepacks/standards:/srv/ocean/content/data:ro
+    mem_limit: 1536m
+    cpus: 2
+    pids_limit: 128
+    restart: unless-stopped

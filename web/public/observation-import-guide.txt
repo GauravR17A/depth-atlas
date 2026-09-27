@@ -1,0 +1,134 @@
+Depth Atlas observation imports, release 0.16.10
+
+Files are sent to this app's Vercel service for request-only parsing. The service
+does not save uploads. Original bytes and parsed results stay in this tab until
+cleared or reloaded unless you explicitly save an investigation on this browser.
+Do not send confidential data to this public prototype.
+
+Limits: 2,000,000 input bytes, 24 profiles, 5,000 total samples per file and
+3,500,000 decoded response bytes. Browser workspace: 32 imported profiles or
+20,000 samples, with 16 MB originals and 24 MB decoded-data limits. Archives, grids and arbitrary spreadsheets are unsupported.
+
+1. Argo / BGC NetCDF
+N_PROF, N_LEVELS, coordinates, JULD, platform, cycle, pressure and QC fields
+are required. Selected variables must use supported units and definitions.
+Core R selects raw; A/D selects adjusted. BGC uses STATION_PARAMETERS and
+PARAMETER_DATA_MODE per parameter. Missing adjustments never fall back to raw.
+Supported measurements: TEMP, PSAL, DOXY, CHLA, NITRATE with documented units.
+Argo QC 1/2 is eligible when pressure/location/time also pass. Raw BGC R
+measurements remain inspect-only. S-file alignment was performed by the GDAC,
+not by Depth Atlas. Unknown layouts or units produce an explanation.
+
+2. IOOS glider row NetCDF
+A one-dimensional ERDDAP .nc row subset with trajectory, profile_id,
+precise_time, precise_lat, precise_lon, pressure, temperature, salinity,
+pressure_qartod_summary_flag, temperature_qartod_summary_flag and
+salinity_qartod_summary_flag. Original per-sample position/time is retained.
+QARTOD 1 passes. QARTOD 2 is not evaluated and does not pass. Reversed source
+valid_min/valid_max metadata makes the affected variable inspect-only.
+Some underwater positions are provider estimates between GPS fixes.
+
+3. CTD Exchange .csv or .txt
+One CTD cast, CTD header, EXPOCODE/STNNBR/CASTNO, DATE (YYYYMMDD), TIME (HHMM,
+UTC), LATITUDE/LONGITUDE, units row and END_DATA. Supported columns CTDPRS,
+CTDTMP, CTDSAL, CTDOXY each require their _FLAG_W quality column. Units are
+DBAR, DEG_C, PSS-78 and UMOL/KG. -999 is missing. Only WOCE flag 2 passes.
+Station coordinates/time are not per-sample fixes. Check the cruise report
+for the temperature scale before quantitative comparisons.
+
+4. Depth Atlas CSV v1 (UTF-8 comma-separated, header required)
+Required columns:
+profile_id,instrument,platform,time,latitude,longitude,pressure_dbar,pressure_qc,position_qc,time_qc
+
+At least one value / QC pair:
+temperature_c,temperature_qc
+salinity_psu,salinity_qc
+oxygen_umol_kg,oxygen_qc
+
+instrument: argo, bgc, glider or ctd. Each profile_id has one platform and type.
+time: ISO 8601 with timezone, for example 2024-01-07T12:00:00Z.
+latitude/longitude: finite WGS84 decimal degrees, [-90,90] / [-180,180].
+pressure_dbar: sea pressure, not absolute pressure or metres; blank is missing.
+Temperature is in-situ Celsius, salinity practical PSS-78, oxygen micromoles/kg.
+Blank readings are missing; -999 is NOT a missing sentinel in this schema.
+QC: 1 good, 2 probably good, 3 questionable, 4 bad, 9 missing, 0 unchecked.
+Only 1/2 pass. These flags are declarations by the uploader, not independently
+verified. Use native Argo NetCDF to retain raw and adjusted processing history.
+Source order and original row indices are kept; duplicate depths are not merged.
+
+Depth is -gsw.z_from_p(sea pressure, sample latitude), GSW 3.6.20, with
+zero default dynamic height and surface geopotential. It is never assumed
+equal to pressure. Negative/unsupported pressure has no usable depth.
+
+Example downloads in the app contain genuine source records. The CSV example
+exports the first 20 original levels from Argo 2903891 cycle 12, using selected
+adjusted values and their original flags. No example measurement is invented.
+Records outside the selected model domain have no local model comparison.
+Linking an observation depth to a model level only navigates the view.
+
+Review workflow
+Choose Import observations, then a file or Preview example. The preview lists
+detected quantities and units, accepted/excluded/missing readings, original
+locations and dates, depth coverage and unsupported fields. Add profiles to
+workspace commits the parsed result to this tab; Discard leaves existing
+profiles unchanged. Cancel stops the browser request and ignores late results.
+It does not promise to interrupt server parsing already in progress.
+
+Supported CSV column mapping
+The CSV schema also supports chlorophyll_mg_m3/chlorophyll_qc and
+nitrate_umol_kg/nitrate_qc. Chlorophyll a is in mg/m3, nitrate in umol/kg.
+If names differ, expand Map supported CSV columns and choose explicit source
+columns and units. Required coordinates, time, pressure and QC must already
+use the definitions above. Do not map QARTOD/WOCE codes as CSV quality flags.
+Use Review mapped file before adding. Allowed measurement conversions:
+- Kelvin to Celsius: subtract 273.15.
+- Chlorophyll mg/L to mg/m3: multiply by 1000.
+- Chlorophyll ug/L to mg/m3: same numerical value.
+- PSS-78 and psu name the supported practical-salinity quantity.
+Oxygen and nitrate must already be in umol/kg. No guessed conversion between
+mass and volume, temperature definitions or salinity definitions is applied.
+Blank/non-finite readings remain missing. Source-specific missing sentinels
+must be replaced with blanks. A documented canonical column cannot be
+relabelled to a different physical quantity or source unit. NetCDF and CTD
+Exchange retain native metadata; they do not use this mapping interface.
+Original file SHA-256, chosen mapping and converted-table hash are retained
+in the temporary profile. Displayed raw CSV values use the converted units.
+
+Connected profile view
+In-domain imports appear in the instrument layer at an eligible sample's
+actual coordinates and timestamp. A moving profile may enter the model area
+after its first sample. Out-of-area profiles remain inspectable on their own
+location map, without a false marker on the model. Profiles and model fields
+keep separate dates. Their co-display does not establish a valid comparison.
+Compatible imported temperature/salinity can be compared under explicit matching
+rules. Save investigation includes its original file for checked replay.
+
+Chlorophyll example
+SR1902594_034.nc is an Argo GDAC/Coriolis synthetic BGC profile from 29 March
+2024 inside the Bay of Bengal model rectangle. The model is January 2024;
+these are different observation and model periods. CHLA_ADJUSTED uses the
+provider's chlorophyll estimate derived from fluorescence. CHLA_FLUORESCENCE
+is a distinct unsupported quantity, not a substitute. This example adds
+observational chlorophyll, not a volumetric chlorophyll model field.
+
+
+SAVE AND REPLAY IMPORTED INVESTIGATIONS (0.16.10)
+Choose Compare with model for eligible temperature/salinity comparisons. Coverage
+and discovery use the selected imported file only. Chlorophyll has no model field.
+Save investigation explicitly keeps the original file, column mapping and parsed
+profiles in this browser with the settings/results. Saving, comparing and replaying
+send original bytes to the service for request-only parsing; no server record is kept.
+JSON/ZIP downloads include your original file. Share only with source permission.
+Imported files cannot be shared through replay URLs. Reopening needs matching model,
+parser and method versions online and verifies exact results before restoring views.
+Local limits: 25 records, 32 MB total, 8 MB per record. Original files: 2 MB.
+An imported result over the 4.2 MB hosted response budget needs a smaller subset.
+Remove local copies from Saved. Clearing temporary imports does not delete saves.
+
+Structure support: Find structures can check eligible observations from the
+selected imported file against a selected native region. This sends the original
+file and mapping for request-only reparsing. Matching rules, residuals and
+coverage gaps stay explicit. A support snapshot exports results and source hashes,
+not original bytes or a replay bundle. Save the comparison for checked replay.
+
+Batch review: up to 8 files / 16 MB original bytes in one sequential queue. Each file retains its 2 MB and 5,000 sample limit. Review decoded data is bounded at 24 MB. Workspace limits: 32 profiles / 20,000 samples / 16 MB originals / 24 MB decoded profiles. These two bounded collections coexist in tab memory; browser object overhead is additional. Add all reviewed files skips failed files and preserves earlier additions on a quota error. Clearing workspace imports does not delete saved investigations.

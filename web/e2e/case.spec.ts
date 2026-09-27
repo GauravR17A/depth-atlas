@@ -1,0 +1,54 @@
+import { enterWorkspace } from './ux-helpers';
+import { expect, test } from '@playwright/test';
+
+test('historical model sample, missing depth and full Argo record', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await enterWorkspace(page);
+  const inspect = page.getByRole('button', { name: 'Case details', exact: true });
+  await inspect.click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toContainText('not live 2026 data');
+  await expect(dialog.locator('.sample-value')).toContainText('°C');
+  await page.getByLabel('Sample depth (m)').selectOption('39');
+  await expect(dialog.locator('.sample-value')).toContainText('No value at this depth');
+  await page.getByLabel('Sample depth (m)').selectOption('19');
+  await page.getByLabel('Sample variable').selectOption('northward_velocity');
+  await page.getByLabel('Sample timestamp (UTC)').selectOption('6');
+  await expect(dialog.locator('.sample-value')).toContainText('m/s');
+  await expect(dialog.locator('.sample-value')).toContainText('10 Jan 2024');
+  await page.getByLabel('Inspect a record').selectOption('argo-1902669-012-0');
+  await expect(dialog.getByRole('table')).toBeVisible();
+  await expect(dialog.getByRole('cell', { name: '28.153', exact: true })).toBeVisible();
+  await expect(dialog).toContainText('103 of 103 samples');
+  await expect(dialog.getByRole('columnheader', { name: /Pressure/ })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(dialog).toHaveCount(0);
+  await expect(inspect).toBeFocused();
+  await page.getByRole('button', { name: 'Sources',exact:true }).click();
+  await page.getByRole('complementary',{name:'Evidence inspector'}).getByRole('button',{name:'Profiles',exact:true}).click();
+  await page.getByRole('complementary',{name:'Evidence inspector'}).getByRole('button', { name: /Argo 7901125/ }).click();
+  await expect(page.getByRole('dialog').getByRole('heading', { name: /Argo 7901125/ })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await page.getByLabel('Study case',{exact:true}).selectOption('pacific-godas-2013-son');
+  await expect(page.getByLabel('Study case', { exact: true })).toHaveValue('pacific-godas-2013-son');
+  await expect(inspect).toBeVisible();
+  await expect(page.getByText('No profiles connected', { exact: true })).toHaveCount(0);
+  await inspect.click();
+  await expect(dialog).toContainText('Potential temperature');
+  await expect(page.getByLabel('Inspect a record').locator('option')).toHaveCount(4);
+  await page.keyboard.press('Escape');
+  expect(errors).toEqual([]);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('scientific sample failure has a retry and does not invent a value', async ({ page }) => {
+  await page.route('**/subset?*', route => route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: { code: 'case_unavailable', message: 'Sample temporarily unavailable.', request_id: 'fixture' } }) }));
+  await enterWorkspace(page);
+  await page.getByRole('button', { name: 'Case details', exact: true }).click();
+  await expect(page.getByRole('dialog').getByRole('alert')).toContainText('Sample temporarily unavailable.');
+  await expect(page.getByRole('dialog').locator('.sample-value')).not.toContainText('°C');
+  await page.unroute('**/subset?*');
+  await page.getByRole('button', { name: 'Retry sample' }).click();
+  await expect(page.getByRole('dialog').locator('.sample-value')).toContainText('°C', { timeout: 20_000 });
+});

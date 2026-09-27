@@ -1,0 +1,103 @@
+[
+  {
+    "mode": "ocean",
+    "case_id": "bay-bengal-2024-01",
+    "variable": "temperature",
+    "time_index": 0,
+    "view": "slice",
+    "depth_index": 19,
+    "section_index": 19,
+    "point": [
+      31,
+      38,
+      19
+    ],
+    "paint": {
+      "min": 0,
+      "max": 30,
+      "log": false,
+      "palette": "thermal",
+      "opacity": 1
+    },
+    "iso": 20,
+    "exaggeration": 200,
+    "window_depth": 1000,
+    "cutaway": true,
+    "quality": "basic",
+    "show_instruments": true
+  },
+  {
+    "mode": "comparison",
+    "case_id": "bay-bengal-2024-01",
+    "profile_id": "argo-1902669-12-0-1c4592fce4",
+    "settings": {
+      "variable": "temperature",
+      "time_index": 1,
+      "time_window_hours": 6,
+      "distance_km": 5,
+      "max_vertical_gap_m": 500,
+      "qc": "good_probably_good"
+    },
+    "sample_index": 4,
+    "view": "comparison",
+    "rank": "nearest",
+    "baseline": {
+      "profile_id": "argo-1902669-12-0-1c4592fce4",
+      "settings": {
+        "variable": "temperature",
+        "time_index": 1,
+        "time_window_hours": 1,
+        "distance_km": 5,
+        "max_vertical_gap_m": 500,
+        "qc": "good_probably_good"
+      }
+    }
+  },
+  {
+    "mode": "features",
+    "case_id": "bay-bengal-2024-01",
+    "query": {
+      "variable": "temperature",
+      "units": "\u00b0C",
+      "time_index": 1,
+      "operator": "at_least",
+      "threshold": 26,
+      "upper_threshold": null,
+      "depth_min_m": 0,
+      "depth_max_m": 300,
+      "order": "volume"
+    },
+    "selected_region": "r0",
+    "section": {
+      "query": {
+        "variable": "temperature",
+        "units": "\u00b0C",
+        "time_index": 1,
+        "operator": "at_least",
+        "threshold": 26,
+        "upper_threshold": null,
+        "depth_min_m": 0,
+        "depth_max_m": 300,
+        "order": "volume"
+      },
+      "start": [
+        86,
+        13
+      ],
+      "end": [
+        89,
+        14
+      ],
+      "stations": 81
+    },
+    "section_pick": 590
+  },
+  {
+    "mode": "instrument",
+    "case_id": "bay-bengal-2024-01",
+    "profile_id": "bgc-6903091-100-0-20692904a9",
+    "variable": "oxygen",
+    "sample_index": 9,
+    "show_excluded": true
+  }
+]

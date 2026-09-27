@@ -1,0 +1,13 @@
+{
+  "name": "depth-atlas",
+  "private": true,
+  "version": "0.17.1",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "build": "npm --prefix web run build",
+    "dev": "npm --prefix web run dev",
+    "test:e2e": "npm --prefix web run test:e2e"
+  }
+}

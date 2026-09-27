@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#08131e" />
+  <meta name="description" content="How Team Seifuku handles requests, temporary imports, browser storage and contact messages in Depth Atlas." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/src/legal.css" />
+  <title>Privacy Policy | Depth Atlas</title>
+</head>
+<body class="legal-page ">
+  <a class="skip-link" href="#document">Skip to content</a>
+  <header class="legal-header">
+    <a class="brand" href="/" aria-label="Depth Atlas home"><img src="/favicon.svg" width="30" height="30" alt="" /><span>Depth<span class="brand-light">Atlas</span></span></a>
+    <a class="return-link" href="/">Back to workspace</a>
+  </header>
+  <main id="document" class="legal-document" tabindex="-1">
+    <div class="document-heading">
+      <p class="eyebrow">SITE INFORMATION</p>
+      <h1>Privacy Policy</h1>
+      <p class="document-date">Last updated <time datetime="2026-09-27">27 September 2026</time></p>
+      <p>This policy explains how the public Depth Atlas prototype handles information when you browse, import observations, save work or contact us.</p>
+    </div>
+    
+<nav class="document-jumps" aria-label="On this page"><a href="#operator">Operator</a><a href="#requests">Data handling</a><a href="#browser-state">Your device</a><a href="#imports">Imports</a><a href="#contact">Your choices</a></nav>
+<section aria-labelledby="operator"><h2 id="operator">Who operates this website</h2>
+<p>Depth Atlas is an independent project by Team Seifuku. Gaurav Ranade created and operates this public website.</p><dl class="site-details">
+  <div><dt>Team</dt><dd>Seifuku</dd></div>
+  <div><dt>Website creator &amp; operator</dt><dd>Gaurav Ranade</dd></div>
+  <div><dt>Location</dt><dd>Pune, Maharashtra, India</dd></div>
+  <div><dt>Contact</dt><dd><a href="mailto:ranadegaurav30@gmail.com">ranadegaurav30@gmail.com</a></dd></div>
+</dl></section>
+<section aria-labelledby="requests"><h2 id="requests">Information used to serve the site</h2>
+<p>Vercel hosts the site and API. Requests can include your IP address, browser information, requested URL, request time, response status and diagnostic identifiers. Hosting logs and application request IDs help with delivery, troubleshooting and security.</p>
+<p>To limit abusive traffic, each API worker keeps short-lived request counters keyed by a salted digest of the client network address. These counters are held in memory, expire after ten minutes without a request and reset when the worker restarts. They do not contain uploaded files or calculation settings. Rate limits can be shared by people using the same network.</p>
+<p>The app sends your selected dataset, dates, variables, study coordinates and calculation settings to its API. This includes particle releases, virtual stations, climate comparisons, feature thresholds and observation exclusions. These are study locations, not your device location. Calculations use packaged public sources; the app does not send your selections to their original data providers.</p>
+<p>This release has no accounts, payments, app-added advertising, analytics, session replay or tracking pixels. It does not request device geolocation or set application cookies. Following an external source link opens a website with its own privacy practices.</p></section>
+<section aria-labelledby="browser-state"><h2 id="browser-state">What stays on your device</h2>
+<dl class="data-handling">
+<div><dt>Unsaved work</dt><dd>View selections, loaded fields and temporary imported profiles stay in tab memory. Clearing imports or reloading removes the temporary profiles. Nearby fields may be prefetched through the same API to make exploration smoother.</dd></div>
+<div><dt>Saved investigations</dt><dd>Save investigation and Keep local copy use IndexedDB in this browser for titles, settings, source references and calculated results. When you save an imported observation or comparison, the record also includes the original file, column mapping and parsed profiles. The limit is 25 records and 32 MB. Remove records from Saved or clear this site's browser data.</dd></div>
+<div><dt>Regional pack</dt><dd>Save regional pack on device uses localStorage for one pack, up to 4 MB. Saving another replaces it. Remove local pack deletes it. This is separate from the Saved investigation list.</dd></div>
+<div><dt>Downloaded files</dt><dd>Reports, CSV, JSON, ZIP and offline HTML stay wherever you save or share them. Browser storage is not a cloud backup and can be removed by browser cleanup or private-browsing rules.</dd></div>
+</dl>
+<p>The Offline viewer download contains saved results, replay settings, source credits and any original imported file already embedded in the investigation. It makes no network requests and creates no additional browser storage. Delete the downloaded HTML to remove that copy. Its charts do not fetch new data or recalculate results.</p><p>Local copies remain until removed, replaced or cleared by you or your browser. The app does not use sessionStorage. Your browser may also cache site files.</p></section>
+<section aria-labelledby="imports"><h2 id="imports">Observation imports</h2>
+<p>Choosing a supported CSV or NetCDF observation file sends its contents to the API for parsing. The application processes it in memory and does not write it to a database or saved upload directory. Original bytes, mapping choices and parsed profiles remain in the current tab until cleared or reloaded unless you explicitly save an investigation. Comparing an import or checking its support for a structure sends the original file and settings to the API again; the app reparses it in memory and does not cache uploaded files on the server.</p>
+<p>A batch sends up to eight files one at a time. Cancelling stops pending client requests; a bounded server request already received may finish. Completed previews and earlier workspace profiles remain until discarded, cleared or reloaded.</p><p>The filename appears in the request URL and may appear in hosting logs. Application code does not log the file contents. Only upload data you are authorized to send to this public service; do not include confidential or personal information. The observation-file limit is 2 MB, with additional schema and sample limits.</p></section>
+<section aria-labelledby="investigations"><h2 id="investigations">Saved files and replay links</h2>
+<p>Support snapshots contain selected observation readings, calculated residuals, matching settings and source hashes, without the original upload. They are not replay bundles. Imported-investigation JSON and ZIP downloads include the original uploaded file. They are not anonymized. Imported files are never placed in replay URLs; use a downloaded file only when you are authorized to share its data.</p>
+<p>An investigation JSON is checked in the browser. Recalculation sends its title, settings, source fingerprints and expected result fingerprints to the API. It does not create a server-side saved record. For an imported investigation, recalculation and verified exports also send the embedded original file and mapping to the API. Reopening replaces the active imported set with the verified file. Other temporary imports are not included in a saved record.</p>
+<p>A replay link includes its title and settings in the URL fragment. The fragment is not sent in the initial HTTP request, but the app sends the recipe when you choose Recalculate and reopen. Anyone receiving the link can read those settings. Avoid personal or confidential information in titles or shared files.</p></section>
+<section aria-labelledby="wider"><h2 id="wider">Wider regional requests and offline packs</h2>
+<p>Regional requests send the source, month, bounds, vertical limits and variable to the API. A bounded server memory cache can reuse identical public-data calculations; it is not an account or a durable history database.</p>
+<p>Importing regional JSON checks and displays the pack locally. Verify replay online sends the pack to the API to compare it with current source data. Downloaded offline HTML makes no network requests. Local regional storage follows the rules above.</p></section>
+<section aria-labelledby="learning"><h2 id="learning">Tutorials and explanations</h2>
+<p>Tutorials call the same APIs as the visible controls. Example imports use bundled public files, not files from your device. Tutorial choices, optional answers and explanation questions remain in tab memory and are not recorded by the app or sent to an external language-model provider. Applying a suggested view makes the usual API requests. Saving, downloading or sharing still requires your action.</p></section>
+<section aria-labelledby="hosting"><h2 id="hosting">Hosting, email and retention</h2>
+<p>Vercel may process hosting information outside your country. Hosting log retention depends on the provider and project configuration. See <a href="https://vercel.com/legal/privacy-notice" target="_blank" rel="noreferrer">Vercel's Privacy Notice</a> and <a href="https://vercel.com/docs/logs/runtime" target="_blank" rel="noreferrer">runtime log documentation</a>. We do not promise a fixed provider-wide deletion period.</p>
+<p>If you email the operator, your email address, message and any attachments are processed through the email service to answer your request. They are separate from the app's browser storage. Avoid sending sensitive files. The app has no server database of visitor profiles or saved investigations.</p></section>
+<section aria-labelledby="contact"><h2 id="contact">Your choices and contact</h2>
+<p>You can use the viewer without uploading a file or saving work. Clear temporary imports in the workspace, delete investigations in Saved, remove a regional pack from Regions, or clear this site's data in your browser. Clearing local storage does not delete files you downloaded or messages you sent by email.</p>
+<p>For privacy questions or requests concerning information you sent us, contact Gaurav Ranade at <a href="mailto:ranadegaurav30@gmail.com">ranadegaurav30@gmail.com</a>. Explain the request without including passwords or unnecessary personal information. We cannot remotely access or erase copies stored only on your device.</p>
+<p>We will revise this page when data handling changes. The date at the top identifies the current published wording.</p></section>
+
+  </main>
+  <footer class="legal-footer"><span>Depth Atlas · Team Seifuku</span><nav class="legal-links" aria-label="Site information"><a href="/about">About Us</a><a href="/privacy" aria-current="page">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a><a href="/data-access">Use the data</a><a href="/third-party-notices.txt">Source &amp; software credits</a></nav></footer>
+</body>
+</html>

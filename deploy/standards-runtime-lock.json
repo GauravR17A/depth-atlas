@@ -1,0 +1,23 @@
+[
+  {
+    "name": "java.zip",
+    "url": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.20.1%2B1/OpenJDK17U-jre_x64_windows_hotspot_17.0.20.1_1.zip",
+    "algorithm": "sha256",
+    "digest": "bc21a93923103cdaac93ee337b0ae4365e739fde36df823dd456bc67c8a9d352",
+    "bytes": 43780109
+  },
+  {
+    "name": "tomcat.zip",
+    "url": "https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.60/bin/apache-tomcat-10.1.60.zip",
+    "algorithm": "sha512",
+    "digest": "706e0fbb79bc476eba9524c251280259e56b56bcd1298b11fc77a60818ab4d24d811420f3c247699a57b8db1418fd474868a7b01ca43d6f4bff788b4e1a0c201",
+    "bytes": 14991988
+  },
+  {
+    "name": "thredds.war",
+    "url": "https://downloads.unidata.ucar.edu/tds/5.9/thredds-5.9.war",
+    "algorithm": "sha256",
+    "digest": "6bcd23832a44980abebe3dc26ef05bf6216f4215ac8080d2167712b0562f2a81",
+    "bytes": 99537625
+  }
+]

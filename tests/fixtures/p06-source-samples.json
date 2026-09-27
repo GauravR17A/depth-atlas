@@ -1,0 +1,248 @@
+{
+  "method": "Manual packed original NetCDF decode in independent protocol verifier; (u*u+v*v)/2 with joint masks.",
+  "rows": [
+    {
+      "time_index": 0,
+      "depth_index": 0,
+      "x": 0,
+      "y": 0,
+      "longitude": 85.0400390625,
+      "latitude": 12.0,
+      "expected": 0.02001700190151301
+    },
+    {
+      "time_index": 0,
+      "depth_index": 0,
+      "x": 30,
+      "y": 38,
+      "longitude": 87.43994140625,
+      "latitude": 13.520000457763672,
+      "expected": 0.008306000789027681
+    },
+    {
+      "time_index": 0,
+      "depth_index": 0,
+      "x": 62,
+      "y": 75,
+      "longitude": 90.0,
+      "latitude": 15.0,
+      "expected": 0.017890001699458848
+    },
+    {
+      "time_index": 0,
+      "depth_index": 19,
+      "x": 0,
+      "y": 0,
+      "longitude": 85.0400390625,
+      "latitude": 12.0,
+      "expected": 0.013712501302617633
+    },
+    {
+      "time_index": 0,
+      "depth_index": 19,
+      "x": 30,
+      "y": 38,
+      "longitude": 87.43994140625,
+      "latitude": 13.520000457763672,
+      "expected": 0.002281000216683378
+    },
+    {
+      "time_index": 0,
+      "depth_index": 19,
+      "x": 62,
+      "y": 75,
+      "longitude": 90.0,
+      "latitude": 15.0,
+      "expected": 0.014602001387115602
+    },
+    {
+      "time_index": 0,
+      "depth_index": 39,
+      "x": 0,
+      "y": 0,
+      "longitude": 85.0400390625,
+      "latitude": 12.0,
+      "expected": null
+    },
+    {
+      "time_index": 0,
+      "depth_index": 39,
+      "x": 30,
+      "y": 38,
+      "longitude": 87.43994140625,
+      "latitude": 13.520000457763672,
+      "expected": null
+    },
+    {
+      "time_index": 0,
+      "depth_index": 39,
+      "x": 62,
+      "y": 75,
+      "longitude": 90.0,
+      "latitude": 15.0,
+      "expected": null
+    },
+    {
+      "time_index": 1,
+      "depth_index": 0,
+      "x": 0,
+      "y": 0,
+      "longitude": 85.0400390625,
+      "latitude": 12.0,
+      "expected": 0.04719650448342703
+    },
+    {
+      "time_index": 1,
+      "depth_index": 0,
+      "x": 30,
+      "y": 38,
+      "longitude": 87.43994140625,
+      "latitude": 13.520000457763672,
+      "expected": 0.03161650300340641
+    },
+    {
+      "time_index": 1,
+      "depth_index": 0,
+      "x": 62,
+      "y": 75,
+      "longitude": 90.0,
+      "latitude": 15.0,
+      "expected": 0.011185001062518012
+    },
+    {
+      "time_index": 1,
+      "depth_index": 19,
+      "x": 0,
+      "y": 0,
+      "longitude": 85.0400390625,
+      "latitude": 12.0,
+      "expected": 0.0024065002286052387
+    },
+    {
+      "time_index": 1,
+      "depth_index": 19,
+      "x": 30,
+      "y": 38,
+      "longitude": 87.43994140625,
+      "latitude": 13.520000457763672,
+      "expected": 0.0016105001529892944
+    },
+    {
+      "time_index": 1,
+      "depth_index": 19,
+      "x": 62,
+      "y": 75,
+      "longitude": 90.0,
+      "latitude": 15.0,
+      "expected": 0.026825002548238323
+    },
+    {
+      "time_index": 1,
+      "depth_index": 39,
+      "x": 0,
+      "y": 0,
+      "longitude": 85.0400390625,
+      "latitude": 12.0,
+      "expected": null
+    },
+    {
+      "time_index": 1,
+      "depth_index": 39,
+      "x": 30,
+      "y": 38,
+      "longitude": 87.43994140625,
+      "latitude": 13.520000457763672,
+      "expected": null
+    },
+    {
+      "time_index": 1,
+      "depth_index": 39,
+      "x": 62,
+      "y": 75,
+      "longitude": 90.0,
+      "latitude": 15.0,
+      "expected": null
+    },
+    {
+      "time_index": 6,
+      "depth_index": 0,
+      "x": 0,
+      "y": 0,
+      "longitude": 85.0400390625,
+      "latitude": 12.0,
+      "expected": 0.03621250344000299
+    },
+    {
+      "time_index": 6,
+      "depth_index": 0,
+      "x": 30,
+      "y": 38,
+      "longitude": 87.43994140625,
+      "latitude": 13.520000457763672,
+      "expected": 0.0036770003492962652
+    },
+    {
+      "time_index": 6,
+      "depth_index": 0,
+      "x": 62,
+      "y": 75,
+      "longitude": 90.0,
+      "latitude": 15.0,
+      "expected": 0.00941300089418704
+    },
+    {
+      "time_index": 6,
+      "depth_index": 19,
+      "x": 0,
+      "y": 0,
+      "longitude": 85.0400390625,
+      "latitude": 12.0,
+      "expected": 0.007312500694650241
+    },
+    {
+      "time_index": 6,
+      "depth_index": 19,
+      "x": 30,
+      "y": 38,
+      "longitude": 87.43994140625,
+      "latitude": 13.520000457763672,
+      "expected": 0.008892500844742192
+    },
+    {
+      "time_index": 6,
+      "depth_index": 19,
+      "x": 62,
+      "y": 75,
+      "longitude": 90.0,
+      "latitude": 15.0,
+      "expected": 0.02013250191248492
+    },
+    {
+      "time_index": 6,
+      "depth_index": 39,
+      "x": 0,
+      "y": 0,
+      "longitude": 85.0400390625,
+      "latitude": 12.0,
+      "expected": null
+    },
+    {
+      "time_index": 6,
+      "depth_index": 39,
+      "x": 30,
+      "y": 38,
+      "longitude": 87.43994140625,
+      "latitude": 13.520000457763672,
+      "expected": null
+    },
+    {
+      "time_index": 6,
+      "depth_index": 39,
+      "x": 62,
+      "y": 75,
+      "longitude": 90.0,
+      "latitude": 15.0,
+      "expected": null
+    }
+  ]
+}

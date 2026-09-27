@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08131e" />
+    <meta name="description" content="Explore selected historical Indian Ocean and tropical Pacific fields, inspect original ocean observations, and compare climate events with their sources." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Depth Atlas · Ocean Explorer</title>
+    <style>
+      #startup-screen,#startup-update{font:16px/1.6 system-ui,sans-serif;color:#dceaf0;background:#0b1621;padding:28px;box-sizing:border-box}
+      #startup-screen{min-height:100vh;display:grid;align-content:center;justify-items:start;gap:12px;max-width:100%;overflow-wrap:anywhere}
+      #startup-screen h1,#startup-update h2{font-size:1.4rem;margin:0}#startup-screen p,#startup-update p{margin:0;max-width:42rem}
+      #startup-screen a,#startup-update a{color:#a1decf}#startup-reload,#startup-update a{display:inline-block;border:1px solid #709f99;border-radius:3px;padding:10px 16px;text-decoration:none}
+      #startup-screen a:focus-visible,#startup-update a:focus-visible{outline:2px solid #a1decf;outline-offset:4px}
+      #startup-update{position:fixed;bottom:16px;left:16px;right:16px;max-width:650px;z-index:10000;border:1px solid #709f99;box-shadow:0 8px 30px #0006}
+      #startup-update[hidden]{display:none}#startup-update p{margin:8px 0 12px}
+    </style>
+    <script>
+      // This guard is inline so it still works when the entry bundle is missing.
+      (function () {
+        var mounted = false, failed = false, timer;
+        function freshUrl() {
+          var url = new URL(window.location.href);
+          url.searchParams.set('_startup_recovered', String(Date.now()));
+          return url.href;
+        }
+        function showFailure() {
+          failed = true;
+          var panel = document.getElementById(mounted ? 'startup-update' : 'startup-screen');
+          if (!panel) return;
+          if (mounted) panel.hidden = false;
+          else {
+            document.getElementById('startup-title').textContent = 'The workspace could not load';
+            document.getElementById('startup-message').textContent = 'A required app file could not be downloaded. Reload to get the current version.';
+            panel.setAttribute('role', 'alert');
+          }
+          panel.querySelector('[data-startup-reload]').href = freshUrl();
+        }
+        window.addEventListener('error', function (event) {
+          var target = event.target;
+          if (!mounted || (target && (target.tagName === 'SCRIPT' || target.tagName === 'LINK'))) showFailure();
+        }, true);
+        window.addEventListener('vite:preloadError', showFailure);
+        window.addEventListener('ocean:mounted', function () {
+          mounted = true;
+          clearTimeout(timer);
+          var url = new URL(window.location.href);
+          if (url.searchParams.has('_startup_recovered')) {
+            url.searchParams.delete('_startup_recovered');
+            history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+          }
+        }, { once: true });
+        document.addEventListener('DOMContentLoaded', function () {
+          document.querySelectorAll('[data-startup-reload]').forEach(function (link) {
+            link.href = freshUrl();
+            link.addEventListener('click', function () { link.href = freshUrl(); });
+          });
+          if (failed) showFailure();
+          if (!mounted) timer = setTimeout(function () { if (!mounted) showFailure(); }, 15000);
+        });
+      }());
+    </script>
+  </head>
+  <body>
+    <div id="root"><section id="startup-screen" aria-live="polite"><img src="/favicon.svg" width="36" height="36" alt="" /><h1 id="startup-title">Opening Depth Atlas</h1><p id="startup-message">Preparing the workspace.</p><a id="startup-reload" data-startup-reload href="/?reload=1">Reload workspace</a><a href="/about">About Depth Atlas</a><noscript><style>#startup-title,#startup-message{display:none}</style><p>Enable JavaScript to use the interactive workspace. About, Privacy and Terms can be read without it.</p></noscript></section></div>
+    <aside id="startup-update" role="alert" hidden><h2>Part of this view could not load</h2><p>Reload to get the current app files. Unsaved work in this tab will be lost.</p><a data-startup-reload href="/?reload=1">Reload workspace</a></aside>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

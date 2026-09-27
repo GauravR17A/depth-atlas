@@ -1,0 +1,869 @@
+{
+  "schema_version": "p13-indices-v1",
+  "primary_enso_index_id": "roni_v6",
+  "snapshot_id": "a5d0378b1d738aca26556db1d3383470b2def495f0983297c921423a0f5fc26d",
+  "snapshot_retrieved_at": "2026-09-23T16:38:34.402790+00:00",
+  "sources": [
+    {
+      "source_id": "bom-2015.html",
+      "name": "bom-2015.html",
+      "url": "https://www.bom.gov.au/climate/current/annual/aus/2015/",
+      "resolved_url": "https://www.bom.gov.au/climate/current/annual/aus/2015/",
+      "retrieved_at": "2026-09-23T16:36:26.504641+00:00",
+      "sha256": "180c273fa97ba8ea347de67f5c43bff8b7d92f5a921675dd657e7fb90429ab5a",
+      "bytes": 107530,
+      "last_modified": null,
+      "etag": null,
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "source_id": "bom-2016.html",
+      "name": "bom-2016.html",
+      "url": "https://www.bom.gov.au/climate/current/annual/aus/2016/",
+      "resolved_url": "https://www.bom.gov.au/climate/current/annual/aus/2016/",
+      "retrieved_at": "2026-09-23T16:36:27.170497+00:00",
+      "sha256": "87f2ed164131740411cfd597f2ece9257fab74ee5e957ca8b3c7e95312476267",
+      "bytes": 137331,
+      "last_modified": null,
+      "etag": null,
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "source_id": "bom-2019.html",
+      "name": "bom-2019.html",
+      "url": "https://www.bom.gov.au/climate/current/annual/aus/2019/",
+      "resolved_url": "https://www.bom.gov.au/climate/current/annual/aus/2019/",
+      "retrieved_at": "2026-09-23T16:36:27.859911+00:00",
+      "sha256": "bfcbdddf0e192f1c579e8d3875c942aa363f037b938e75a3deed8be67e4aa231",
+      "bytes": 153841,
+      "last_modified": null,
+      "etag": null,
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "source_id": "bom-2022.html",
+      "name": "bom-2022.html",
+      "url": "https://www.bom.gov.au/climate/current/annual/aus/2022/",
+      "resolved_url": "https://www.bom.gov.au/climate/current/annual/aus/2022/",
+      "retrieved_at": "2026-09-23T16:38:34.402790+00:00",
+      "sha256": "59725b145e6d1ca76e03d0a2c49cbadd391e64210d47ee1961ee6085cc16abe2",
+      "bytes": 170872,
+      "last_modified": null,
+      "etag": null,
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "source_id": "bom-iod-years.html",
+      "name": "bom-iod-years.html",
+      "url": "https://www.bom.gov.au/climate/iod/content/years-iod-enso.html",
+      "resolved_url": "https://www.bom.gov.au/climate/iod/content/years-iod-enso.html",
+      "retrieved_at": "2026-09-23T16:36:25.958881+00:00",
+      "sha256": "3ae2354b5e541c1b606c72aef836726ec97bb1e5f04695c82e001cc6a0383169",
+      "bytes": 2537,
+      "last_modified": "Fri, 19 May 2023 07:21:19 GMT",
+      "etag": "\"b6fec8-9e9-5fc06c46c79c0\"",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "source_id": "cpc-dmi-v6.html",
+      "name": "cpc-dmi-v6.html",
+      "url": "https://www.cpc.ncep.noaa.gov/products/international/ocean_monitoring/IODMI/DMI_season.html",
+      "resolved_url": "https://www.cpc.ncep.noaa.gov/products/international/ocean_monitoring/IODMI/DMI_season.html",
+      "retrieved_at": "2026-09-23T16:36:20.265576+00:00",
+      "sha256": "34ce0c960e1272592bb7c92c49d28b249d125c8d92c2eddc1f26e5f34f93c69e",
+      "bytes": 61579,
+      "last_modified": null,
+      "etag": null,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "source_id": "cpc-dmi-v6.txt",
+      "name": "cpc-dmi-v6.txt",
+      "url": "https://www.cpc.ncep.noaa.gov/products/international/ocean_monitoring/IODMI/mnth.ersstv6.clim19912020.dmi_season.txt",
+      "resolved_url": "https://www.cpc.ncep.noaa.gov/products/international/ocean_monitoring/IODMI/mnth.ersstv6.clim19912020.dmi_season.txt",
+      "retrieved_at": "2026-09-23T16:38:30.891172+00:00",
+      "sha256": "f26657053e4d8260d3feab65719836c91862a06cf660b5d9090dd6160b19329a",
+      "bytes": 29306,
+      "last_modified": "Thu, 17 Sep 2026 18:06:05 GMT",
+      "etag": null,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    {
+      "source_id": "cpc-oni-baselines.html",
+      "name": "cpc-oni-baselines.html",
+      "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_change.shtml",
+      "resolved_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_change.shtml",
+      "retrieved_at": "2026-09-23T16:36:15.673524+00:00",
+      "sha256": "974b76b0bfff6f689f7079526a00504512e3091125c29f1af86e2048be63682a",
+      "bytes": 11104,
+      "last_modified": null,
+      "etag": null,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "source_id": "cpc-oni-v5.html",
+      "name": "cpc-oni-v5.html",
+      "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v5/",
+      "resolved_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v5/",
+      "retrieved_at": "2026-09-23T16:36:06.734392+00:00",
+      "sha256": "f758bd32a26ac7c390b0d91c78fceba2256f758a5dbb29d9916cfea489d41a2c",
+      "bytes": 162867,
+      "last_modified": null,
+      "etag": null,
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "source_id": "cpc-oni-v6.html",
+      "name": "cpc-oni-v6.html",
+      "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/",
+      "resolved_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/",
+      "retrieved_at": "2026-09-23T16:36:10.741734+00:00",
+      "sha256": "e4eefa858ffa8a38b47c58a226a9e4801d27918bd1524d26c7108b47838ac477",
+      "bytes": 162972,
+      "last_modified": null,
+      "etag": null,
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "source_id": "cpc-roni-notice.pdf",
+      "name": "cpc-roni-notice.pdf",
+      "url": "https://www.weather.gov/media/notification/pdf_2026/pns26-05_Relative_ONI.pdf",
+      "resolved_url": "https://www.weather.gov/media/notification/pdf_2026/pns26-05_Relative_ONI.pdf",
+      "retrieved_at": "2026-09-23T16:36:17.107673+00:00",
+      "sha256": "b2393c1684d388664528a36960a98d4f701092522feff894e806b9bc8ac7b216",
+      "bytes": 50717,
+      "last_modified": "Tue, 13 Jan 2026 19:32:14 GMT",
+      "etag": null,
+      "content_type": "application/pdf"
+    },
+    {
+      "source_id": "cpc-roni-v6.html",
+      "name": "cpc-roni-v6.html",
+      "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/",
+      "resolved_url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/",
+      "retrieved_at": "2026-09-23T16:36:13.607520+00:00",
+      "sha256": "a01e3df387390792b3ca10e8a8ccfe0c718d95f57c60996af782bc3e4337040f",
+      "bytes": 97775,
+      "last_modified": null,
+      "etag": null,
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "source_id": "cpc-roni.txt",
+      "name": "cpc-roni.txt",
+      "url": "https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt",
+      "resolved_url": "https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt",
+      "retrieved_at": "2026-09-23T16:36:18.721089+00:00",
+      "sha256": "2f1c446b0c293358af6452808799b0dca75f89b0a1d6f86eb1887dc3de9b5eae",
+      "bytes": 14720,
+      "last_modified": "Thu, 03 Sep 2026 18:32:06 GMT",
+      "etag": null,
+      "content_type": "text/plain; charset=utf-8"
+    },
+    {
+      "source_id": "jamstec-2019.html",
+      "name": "jamstec-2019.html",
+      "url": "https://www.jamstec.go.jp/e/about/press_release/20200406/",
+      "resolved_url": "https://www.jamstec.go.jp/e/about/press_release/20200406/",
+      "retrieved_at": "2026-09-23T16:36:28.628697+00:00",
+      "sha256": "52226a23257369483e489eace540b2414a4fc019f1edae83ada76f26cc83a950",
+      "bytes": 23018,
+      "last_modified": null,
+      "etag": null,
+      "content_type": "text/html"
+    },
+    {
+      "source_id": "psl-dmi-description.html",
+      "name": "psl-dmi-description.html",
+      "url": "https://psl.noaa.gov/data/timeseries/month/DMI/",
+      "resolved_url": "https://psl.noaa.gov/data/timeseries/month/DMI/",
+      "retrieved_at": "2026-09-23T16:36:23.604707+00:00",
+      "sha256": "81261bb5617f30e9086509d420ac49a0c5d2d4ace6c90355dbd339ee12006a20",
+      "bytes": 34692,
+      "last_modified": null,
+      "etag": null,
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "source_id": "psl-dmi-hadisst.txt",
+      "name": "psl-dmi-hadisst.txt",
+      "url": "https://psl.noaa.gov/data/timeseries/month/data/dmi.had.long.data",
+      "resolved_url": "https://psl.noaa.gov/data/timeseries/month/data/dmi.had.long.data",
+      "retrieved_at": "2026-09-23T16:36:22.327215+00:00",
+      "sha256": "e9f408cce79cddb9f2226860e7e9049e2936e3707e79371efe49fc77f4f69eff",
+      "bytes": 19861,
+      "last_modified": "Sat, 25 Jul 2026 19:57:34 GMT",
+      "etag": "\"4d95-65774e67a27b2\"",
+      "content_type": null
+    },
+    {
+      "source_id": "psl-dmi-method.ncl",
+      "name": "psl-dmi-method.ncl",
+      "url": "https://psl.noaa.gov/data/timeseries/month/DMI/dmi.ncl",
+      "resolved_url": "https://psl.noaa.gov/data/timeseries/month/DMI/dmi.ncl",
+      "retrieved_at": "2026-09-23T16:36:25.067075+00:00",
+      "sha256": "552f490fc6b04c55789a02c8a835d23f86fb382a0f51da2cee95eea131b3a653",
+      "bytes": 3596,
+      "last_modified": "Fri, 29 Apr 2022 14:50:24 GMT",
+      "etag": "\"e0c-5ddcc299ebb31\"",
+      "content_type": null
+    }
+  ],
+  "definitions": {
+    "roni_v6": {
+      "name": "Relative Oceanic Nino Index",
+      "provider": "NOAA Climate Prediction Center",
+      "dataset": "ERSSTv6",
+      "units": "degrees_Celsius",
+      "baseline_period": [
+        1991,
+        2020
+      ],
+      "source_id": "cpc-roni-v6.html",
+      "primary": true,
+      "region": {
+        "west": -170,
+        "east": -120,
+        "south": -5,
+        "north": 5
+      },
+      "method": "Three-month mean Nino 3.4 SST anomaly minus the tropical (20S-20N) mean SST anomaly, rescaled to the original Nino 3.4 index variance.",
+      "classification": "Provider historical episode labels; independently checked using inclusive +/-0.5 C thresholds for at least five consecutive overlapping three-month seasons in the published rounded table.",
+      "threshold_c": 0.5,
+      "minimum_consecutive_seasons": 5,
+      "operational_since": "2026-02-01",
+      "operational_notice_source_id": "cpc-roni-notice.pdf",
+      "revision_policy": "Snapshot pinned; provider notes newest values may change for two months. Selected 2013, 2015 and 2022 rows are historical, not current provisional monitoring.",
+      "interpretation": "An ENSO index does not by itself establish every coupled atmospheric feature or a local weather forecast."
+    },
+    "oni_v5": {
+      "name": "Historical Oceanic Nino Index",
+      "provider": "NOAA Climate Prediction Center",
+      "dataset": "ERSSTv5",
+      "units": "degrees_Celsius",
+      "source_id": "cpc-oni-v5.html",
+      "primary": false,
+      "baseline_period": null,
+      "baseline_policy": "Provider centered 30-year periods, revised every five years; use the exact pinned provider table, not a replacement fixed baseline.",
+      "method": "Three-month Nino 3.4 SST anomaly; five overlapping seasons at inclusive +/-0.5 C for historical episodes.",
+      "interpretation": "Legacy historical context, separately versioned; not the current operational index."
+    },
+    "oni_v6": {
+      "name": "Oceanic Nino Index",
+      "provider": "NOAA Climate Prediction Center",
+      "dataset": "ERSSTv6",
+      "units": "degrees_Celsius",
+      "source_id": "cpc-oni-v6.html",
+      "primary": false,
+      "baseline_period": null,
+      "baseline_policy": "Provider centered 30-year periods, revised every five years; use the exact pinned provider table.",
+      "method": "Three-month Nino 3.4 SST anomaly; five overlapping seasons at inclusive +/-0.5 C for historical episodes.",
+      "interpretation": "A separate index, not interchangeable with RONI or ONI ERSSTv5."
+    },
+    "dmi_cpc_v6": {
+      "name": "Dipole Mode Index",
+      "provider": "NOAA Climate Prediction Center International Desks",
+      "dataset": "ERSSTv6",
+      "units": "degrees_Celsius",
+      "baseline_period": [
+        1991,
+        2020
+      ],
+      "source_id": "cpc-dmi-v6.txt",
+      "display_table_source_id": "cpc-dmi-v6.html",
+      "method": "Three-month western Indian Ocean SST anomaly minus southeastern Indian Ocean SST anomaly from the provider's seasonal text table.",
+      "west_region": {
+        "west": 50,
+        "east": 70,
+        "south": -10,
+        "north": 10
+      },
+      "east_region": {
+        "west": 90,
+        "east": 110,
+        "south": -10,
+        "north": 0
+      },
+      "threshold_c": 0.4,
+      "classification": "Numerical seasonal context only. Historical IOD episode labels are attributed separately to the Bureau of Meteorology statements; a seasonal value does not automatically reproduce that episode classification.",
+      "metadata_note": "The downloadable series and its filename explicitly specify 1991-2020. The HTML page also has generic centered-30-year/10-year-update wording. This snapshot follows the specific downloadable series definition and retains both source documents.",
+      "revision_policy": "Snapshot pinned; recent provider values may change for two months. No current provisional season is selected."
+    }
+  },
+  "events": [
+    {
+      "event_id": "son-2013",
+      "year": 2013,
+      "season": "SON",
+      "months": [
+        9,
+        10,
+        11
+      ],
+      "period": {
+        "start": "2013-09-01",
+        "end": "2013-11-30"
+      },
+      "data_status": "historical_pinned_snapshot",
+      "enso": {
+        "classification": "neutral",
+        "index_id": "roni_v6",
+        "value_c": -0.2,
+        "units": "degrees_Celsius",
+        "qualifying_run": null
+      },
+      "iod": {
+        "classification": "unassigned",
+        "classification_basis": "No historical IOD episode label is assigned to the 2013 case. The numerical index remains visible.",
+        "event_label_source_id": null,
+        "seasonal_dmi_c": -0.17,
+        "index_id": "dmi_cpc_v6",
+        "episode_timing_note": "No event interval assigned."
+      },
+      "monthly_context": [
+        {
+          "month": 9,
+          "centered_season": "ASO",
+          "season_months": [
+            "2013-08",
+            "2013-09",
+            "2013-10"
+          ],
+          "roni_v6_c": -0.4,
+          "oni_v5_c": -0.2,
+          "oni_v6_c": -0.3,
+          "cpc_dmi_v6_c": -0.26,
+          "cpc_wtio_v6_c": -0.08,
+          "cpc_setio_v6_c": 0.19,
+          "interpretation": "This is a centered three-month index window, not the single month's SST anomaly."
+        },
+        {
+          "month": 10,
+          "centered_season": "SON",
+          "season_months": [
+            "2013-09",
+            "2013-10",
+            "2013-11"
+          ],
+          "roni_v6_c": -0.2,
+          "oni_v5_c": -0.1,
+          "oni_v6_c": -0.1,
+          "cpc_dmi_v6_c": -0.17,
+          "cpc_wtio_v6_c": 0.09,
+          "cpc_setio_v6_c": 0.26,
+          "interpretation": "This is a centered three-month index window, not the single month's SST anomaly."
+        },
+        {
+          "month": 11,
+          "centered_season": "OND",
+          "season_months": [
+            "2013-10",
+            "2013-11",
+            "2013-12"
+          ],
+          "roni_v6_c": -0.2,
+          "oni_v5_c": -0.1,
+          "oni_v6_c": -0.1,
+          "cpc_dmi_v6_c": -0.11,
+          "cpc_wtio_v6_c": 0.14,
+          "cpc_setio_v6_c": 0.25,
+          "interpretation": "This is a centered three-month index window, not the single month's SST anomaly."
+        }
+      ],
+      "legacy_enso_context": [
+        {
+          "index_id": "oni_v5",
+          "value_c": -0.1,
+          "classification": "neutral"
+        },
+        {
+          "index_id": "oni_v6",
+          "value_c": -0.1,
+          "classification": "neutral"
+        }
+      ]
+    },
+    {
+      "event_id": "son-2015",
+      "year": 2015,
+      "season": "SON",
+      "months": [
+        9,
+        10,
+        11
+      ],
+      "period": {
+        "start": "2015-09-01",
+        "end": "2015-11-30"
+      },
+      "data_status": "historical_pinned_snapshot",
+      "enso": {
+        "classification": "el_nino",
+        "index_id": "roni_v6",
+        "value_c": 2.0,
+        "units": "degrees_Celsius",
+        "qualifying_run": {
+          "first": {
+            "year": 2014,
+            "season": "OND",
+            "value_c": 0.5
+          },
+          "last": {
+            "year": 2016,
+            "season": "MAM",
+            "value_c": 0.7
+          },
+          "season_count": 18,
+          "season_values": [
+            {
+              "year": 2014,
+              "season": "OND",
+              "value_c": 0.5
+            },
+            {
+              "year": 2014,
+              "season": "NDJ",
+              "value_c": 0.6
+            },
+            {
+              "year": 2015,
+              "season": "DJF",
+              "value_c": 0.5
+            },
+            {
+              "year": 2015,
+              "season": "JFM",
+              "value_c": 0.5
+            },
+            {
+              "year": 2015,
+              "season": "FMA",
+              "value_c": 0.6
+            },
+            {
+              "year": 2015,
+              "season": "MAM",
+              "value_c": 0.7
+            },
+            {
+              "year": 2015,
+              "season": "AMJ",
+              "value_c": 0.9
+            },
+            {
+              "year": 2015,
+              "season": "MJJ",
+              "value_c": 1.0
+            },
+            {
+              "year": 2015,
+              "season": "JJA",
+              "value_c": 1.3
+            },
+            {
+              "year": 2015,
+              "season": "JAS",
+              "value_c": 1.5
+            },
+            {
+              "year": 2015,
+              "season": "ASO",
+              "value_c": 1.8
+            },
+            {
+              "year": 2015,
+              "season": "SON",
+              "value_c": 2.0
+            },
+            {
+              "year": 2015,
+              "season": "OND",
+              "value_c": 2.2
+            },
+            {
+              "year": 2015,
+              "season": "NDJ",
+              "value_c": 2.3
+            },
+            {
+              "year": 2016,
+              "season": "DJF",
+              "value_c": 2.1
+            },
+            {
+              "year": 2016,
+              "season": "JFM",
+              "value_c": 1.8
+            },
+            {
+              "year": 2016,
+              "season": "FMA",
+              "value_c": 1.3
+            },
+            {
+              "year": 2016,
+              "season": "MAM",
+              "value_c": 0.7
+            }
+          ]
+        }
+      },
+      "iod": {
+        "classification": "positive",
+        "classification_basis": "Positive IOD episode documented in the Bureau of Meteorology 2015 annual statement. This is separate from the CPC SON DMI of +0.39 C, which is below +0.4 C.",
+        "event_label_source_id": "bom-2015.html",
+        "seasonal_dmi_c": 0.39,
+        "index_id": "dmi_cpc_v6",
+        "episode_timing_note": "The source describes late August to mid-November 2015; exact onset and end dates are not supplied here."
+      },
+      "monthly_context": [
+        {
+          "month": 9,
+          "centered_season": "ASO",
+          "season_months": [
+            "2015-08",
+            "2015-09",
+            "2015-10"
+          ],
+          "roni_v6_c": 1.8,
+          "oni_v5_c": 2.2,
+          "oni_v6_c": 2.0,
+          "cpc_dmi_v6_c": 0.45,
+          "cpc_wtio_v6_c": 0.63,
+          "cpc_setio_v6_c": 0.18,
+          "interpretation": "This is a centered three-month index window, not the single month's SST anomaly."
+        },
+        {
+          "month": 10,
+          "centered_season": "SON",
+          "season_months": [
+            "2015-09",
+            "2015-10",
+            "2015-11"
+          ],
+          "roni_v6_c": 2.0,
+          "oni_v5_c": 2.5,
+          "oni_v6_c": 2.3,
+          "cpc_dmi_v6_c": 0.39,
+          "cpc_wtio_v6_c": 0.64,
+          "cpc_setio_v6_c": 0.24,
+          "interpretation": "This is a centered three-month index window, not the single month's SST anomaly."
+        },
+        {
+          "month": 11,
+          "centered_season": "OND",
+          "season_months": [
+            "2015-10",
+            "2015-11",
+            "2015-12"
+          ],
+          "roni_v6_c": 2.2,
+          "oni_v5_c": 2.6,
+          "oni_v6_c": 2.5,
+          "cpc_dmi_v6_c": 0.26,
+          "cpc_wtio_v6_c": 0.66,
+          "cpc_setio_v6_c": 0.4,
+          "interpretation": "This is a centered three-month index window, not the single month's SST anomaly."
+        }
+      ],
+      "legacy_enso_context": [
+        {
+          "index_id": "oni_v5",
+          "value_c": 2.5,
+          "classification": "el_nino"
+        },
+        {
+          "index_id": "oni_v6",
+          "value_c": 2.3,
+          "classification": "el_nino"
+        }
+      ]
+    },
+    {
+      "event_id": "son-2022",
+      "year": 2022,
+      "season": "SON",
+      "months": [
+        9,
+        10,
+        11
+      ],
+      "period": {
+        "start": "2022-09-01",
+        "end": "2022-11-30"
+      },
+      "data_status": "historical_pinned_snapshot",
+      "enso": {
+        "classification": "la_nina",
+        "index_id": "roni_v6",
+        "value_c": -1.1,
+        "units": "degrees_Celsius",
+        "qualifying_run": {
+          "first": {
+            "year": 2020,
+            "season": "AMJ",
+            "value_c": -0.5
+          },
+          "last": {
+            "year": 2023,
+            "season": "FMA",
+            "value_c": -0.5
+          },
+          "season_count": 35,
+          "season_values": [
+            {
+              "year": 2020,
+              "season": "AMJ",
+              "value_c": -0.5
+            },
+            {
+              "year": 2020,
+              "season": "MJJ",
+              "value_c": -0.7
+            },
+            {
+              "year": 2020,
+              "season": "JJA",
+              "value_c": -0.8
+            },
+            {
+              "year": 2020,
+              "season": "JAS",
+              "value_c": -0.8
+            },
+            {
+              "year": 2020,
+              "season": "ASO",
+              "value_c": -1.2
+            },
+            {
+              "year": 2020,
+              "season": "SON",
+              "value_c": -1.4
+            },
+            {
+              "year": 2020,
+              "season": "OND",
+              "value_c": -1.5
+            },
+            {
+              "year": 2020,
+              "season": "NDJ",
+              "value_c": -1.4
+            },
+            {
+              "year": 2021,
+              "season": "DJF",
+              "value_c": -1.3
+            },
+            {
+              "year": 2021,
+              "season": "JFM",
+              "value_c": -1.2
+            },
+            {
+              "year": 2021,
+              "season": "FMA",
+              "value_c": -1.1
+            },
+            {
+              "year": 2021,
+              "season": "MAM",
+              "value_c": -0.9
+            },
+            {
+              "year": 2021,
+              "season": "AMJ",
+              "value_c": -0.7
+            },
+            {
+              "year": 2021,
+              "season": "MJJ",
+              "value_c": -0.6
+            },
+            {
+              "year": 2021,
+              "season": "JJA",
+              "value_c": -0.6
+            },
+            {
+              "year": 2021,
+              "season": "JAS",
+              "value_c": -0.8
+            },
+            {
+              "year": 2021,
+              "season": "ASO",
+              "value_c": -0.9
+            },
+            {
+              "year": 2021,
+              "season": "SON",
+              "value_c": -1.1
+            },
+            {
+              "year": 2021,
+              "season": "OND",
+              "value_c": -1.2
+            },
+            {
+              "year": 2021,
+              "season": "NDJ",
+              "value_c": -1.2
+            },
+            {
+              "year": 2022,
+              "season": "DJF",
+              "value_c": -1.2
+            },
+            {
+              "year": 2022,
+              "season": "JFM",
+              "value_c": -1.1
+            },
+            {
+              "year": 2022,
+              "season": "FMA",
+              "value_c": -1.2
+            },
+            {
+              "year": 2022,
+              "season": "MAM",
+              "value_c": -1.3
+            },
+            {
+              "year": 2022,
+              "season": "AMJ",
+              "value_c": -1.2
+            },
+            {
+              "year": 2022,
+              "season": "MJJ",
+              "value_c": -0.9
+            },
+            {
+              "year": 2022,
+              "season": "JJA",
+              "value_c": -0.9
+            },
+            {
+              "year": 2022,
+              "season": "JAS",
+              "value_c": -0.9
+            },
+            {
+              "year": 2022,
+              "season": "ASO",
+              "value_c": -1.1
+            },
+            {
+              "year": 2022,
+              "season": "SON",
+              "value_c": -1.1
+            },
+            {
+              "year": 2022,
+              "season": "OND",
+              "value_c": -1.1
+            },
+            {
+              "year": 2022,
+              "season": "NDJ",
+              "value_c": -1.0
+            },
+            {
+              "year": 2023,
+              "season": "DJF",
+              "value_c": -0.9
+            },
+            {
+              "year": 2023,
+              "season": "JFM",
+              "value_c": -0.7
+            },
+            {
+              "year": 2023,
+              "season": "FMA",
+              "value_c": -0.5
+            }
+          ]
+        }
+      },
+      "iod": {
+        "classification": "negative",
+        "classification_basis": "Negative IOD episode documented in the Bureau of Meteorology 2022 annual statement; the independently sourced CPC SON DMI is -0.48 C.",
+        "event_label_source_id": "bom-2022.html",
+        "seasonal_dmi_c": -0.48,
+        "index_id": "dmi_cpc_v6",
+        "episode_timing_note": "The source describes strong negative conditions from July through September, weakening during austral spring and dissipating by late November 2022. Exact event dates are not assigned."
+      },
+      "monthly_context": [
+        {
+          "month": 9,
+          "centered_season": "ASO",
+          "season_months": [
+            "2022-08",
+            "2022-09",
+            "2022-10"
+          ],
+          "roni_v6_c": -1.1,
+          "oni_v5_c": -1.0,
+          "oni_v6_c": -0.9,
+          "cpc_dmi_v6_c": -0.54,
+          "cpc_wtio_v6_c": -0.19,
+          "cpc_setio_v6_c": 0.35,
+          "interpretation": "This is a centered three-month index window, not the single month's SST anomaly."
+        },
+        {
+          "month": 10,
+          "centered_season": "SON",
+          "season_months": [
+            "2022-09",
+            "2022-10",
+            "2022-11"
+          ],
+          "roni_v6_c": -1.1,
+          "oni_v5_c": -0.9,
+          "oni_v6_c": -0.9,
+          "cpc_dmi_v6_c": -0.48,
+          "cpc_wtio_v6_c": -0.21,
+          "cpc_setio_v6_c": 0.27,
+          "interpretation": "This is a centered three-month index window, not the single month's SST anomaly."
+        },
+        {
+          "month": 11,
+          "centered_season": "OND",
+          "season_months": [
+            "2022-10",
+            "2022-11",
+            "2022-12"
+          ],
+          "roni_v6_c": -1.1,
+          "oni_v5_c": -0.8,
+          "oni_v6_c": -0.8,
+          "cpc_dmi_v6_c": -0.37,
+          "cpc_wtio_v6_c": -0.17,
+          "cpc_setio_v6_c": 0.2,
+          "interpretation": "This is a centered three-month index window, not the single month's SST anomaly."
+        }
+      ],
+      "legacy_enso_context": [
+        {
+          "index_id": "oni_v5",
+          "value_c": -0.9,
+          "classification": "la_nina"
+        },
+        {
+          "index_id": "oni_v6",
+          "value_c": -0.9,
+          "classification": "la_nina"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Three selected seasons are historical examples, not a composite or a causal experiment.",
+    "ENSO and IOD use separate definitions and event evidence.",
+    "Index baselines differ from the ocean-field baseline and their anomaly magnitudes must not be equated."
+  ]
+}

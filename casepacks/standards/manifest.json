@@ -1,0 +1,22 @@
+{
+  "schema_version": "1",
+  "file": "bay-bengal-2024-01.nc",
+  "bytes": 27554963,
+  "sha256": "b6e7c28e5e3f979a163d984d692000141b696e97c1738af3a359abc7a6f4bc69",
+  "source_manifest_sha256": "9598b33dc9eef89cb909f2811e1590ca580a143c1dbcc25d97e51a84faf7d28d",
+  "conventions": "CF-1.10",
+  "method_id": "p06-cf-exchange-v1",
+  "shape": [
+    7,
+    40,
+    76,
+    63
+  ],
+  "variables": [
+    "temperature",
+    "salinity",
+    "eastward_velocity",
+    "northward_velocity",
+    "horizontal_kinetic_energy"
+  ]
+}

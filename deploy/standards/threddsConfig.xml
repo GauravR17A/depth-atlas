@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<threddsConfig>
+  <serverInformation><name>Depth Atlas standards test service</name><abstract>Historical Bay of Bengal case</abstract></serverInformation>
+  <WMS><allow>true</allow><allowRemote>false</allowRemote><maxImageWidth>1024</maxImageWidth><maxImageHeight>1024</maxImageHeight></WMS>
+  <WCS><allow>true</allow><allowRemote>false</allowRemote><scour>15 min</scour><maxAge>30 min</maxAge></WCS>
+  <Opendap><ascLimit>5</ascLimit><binLimit>64</binLimit></Opendap>
+  <HTTPServer><allow>true</allow></HTTPServer>
+  <NetcdfSubsetService><allow>false</allow><allowRemote>false</allowRemote></NetcdfSubsetService>
+  <NCISO><ncmlAllow>false</ncmlAllow><uddcAllow>false</uddcAllow><isoAllow>false</isoAllow></NCISO>
+</threddsConfig>

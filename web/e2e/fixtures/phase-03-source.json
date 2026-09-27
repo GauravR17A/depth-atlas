@@ -1,0 +1,56 @@
+{
+  "method": "Independent netCDF4 packed integer read, explicit source scale and offset; no application adapter.",
+  "source": "data\\raw\\hycom\\20240107T000000Z.nc",
+  "sha256": "44375a0a366eff00a2950a0a3353236842cbdd8ff32d3167dcf5dd48cb3f1185",
+  "bounds": [
+    85.0400390625,
+    12.0,
+    90.0,
+    15.0
+  ],
+  "depth_max": 5000.0,
+  "points": [
+    {
+      "indices": [
+        21,
+        51,
+        19
+      ],
+      "coordinates": [
+        86.719970703125,
+        14.039999961853027,
+        100.0
+      ],
+      "packed": 2547,
+      "expected": 22.54700012097601
+    },
+    {
+      "indices": [
+        20,
+        38,
+        32
+      ],
+      "coordinates": [
+        86.6400146484375,
+        13.520000457763672,
+        1000.0
+      ],
+      "packed": -13462,
+      "expected": 6.5379993605893105
+    }
+  ],
+  "cut_face": {
+    "indices": [
+      44,
+      38,
+      27
+    ],
+    "coordinates": [
+      88.56005859375,
+      13.520000457763672,
+      500.0
+    ],
+    "expected": 9.832999517093413,
+    "packed": -10167
+  }
+}
