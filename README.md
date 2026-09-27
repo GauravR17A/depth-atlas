@@ -8,6 +8,10 @@ A browser workspace for looking beneath the ocean surface and checking model fie
 
 ![Depth Atlas data globe and dataset selection](docs/assets/workspace.png)
 
+## Technical Documentation
+
+[Documentation index](docs/README.md) | [Full technical documentation (PDF)](docs/Depth_Atlas_Main_Documentation.pdf)
+
 ## Start with one investigation
 
 1. Use the globe to choose the January Bay of Bengal dataset. Basic tutorial mode can guide you, or choose **Skip tutorial**.
